@@ -1,0 +1,13 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect(document.location.origin);
+  socket.on('update', function (data) {
+    console.dir(data);
+    txt = data.reduce(function(str, o){
+      return str + [o.ipv4, o.mac, o.nickname].join("\t")+"\n";
+    }, new Date()+"\n");
+    log.appendChild(document.createTextNode(txt));
+  });
+</script>
+<pre id="log">
+</pre>
